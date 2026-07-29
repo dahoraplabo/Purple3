@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelTrove | Registrar</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ff8bdd'/%3E%3Ctext x='50' y='60' font-size='50' text-anchor='middle' fill='%2308121d' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" defer src="src/main.js"></script>
+</head>
+<body id="registerPage">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">⚔️</span>
+      <div>
+        <h1>PixelTrove</h1>
+        <p>Portal da guilda</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button id="loginButton" class="button secondary">Entrar</button>
+      <button id="logoutButton" class="button secondary hidden">Sair</button>
+    </div>
+    <nav class="main-nav">
+      <a href="Home.html">Home</a>
+      <a href="Login.html">Entrar</a>
+      <a href="Register.html" class="active-link">Registrar</a>
+      <a href="Hub.html">Hub</a>
+    </nav>
+  </header>
+
+  <section class="auth-section">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Acesso à Guilda</span>
+        <h2>Registro</h2>
+      </div>
+    </div>
+    <div class="auth-panel-wrapper page">
+      <div class="page-heading">
+        <h3>Crie sua conta</h3>
+        <p>Preencha o cadastro e aceite as regras para entrar na guilda PixelTrove.</p>
+      </div>
+      <form id="registerForm" class="auth-panel">
+        <div class="field-row">
+          <label>Email</label>
+          <input type="email" name="registerEmail" required />
+        </div>
+        <div class="field-row">
+          <label>Senha</label>
+          <input type="password" name="registerPassword" required minlength="6" />
+        </div>
+        <div class="field-row">
+          <label>Nickname desejado</label>
+          <input type="text" name="registerNickname" required />
+        </div>
+        <div class="field-row split">
+          <label>UF (Estado)
+            <select name="registerState" required>
+              <option value="">Selecione</option>
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AP">AP</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="MG">MG</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PR">PR</option>
+              <option value="PE">PE</option>
+              <option value="PI">PI</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RS">RS</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="SC">SC</option>
+              <option value="SP">SP</option>
+              <option value="SE">SE</option>
+              <option value="TO">TO</option>
+            </select>
+          </label>
+          <label>Como descobriu?
+            <input type="text" name="registerDiscover" required />
+          </label>
+        </div>
+        <div class="field-row">
+          <label>Endereço</label>
+          <input type="text" name="registerAddress" required />
+        </div>
+        <label class="checkbox-label">
+          <input type="checkbox" name="registerRules" required />
+          Eu li e aceito as regras da guilda PixelTrove.
+        </label>
+        <button class="button primary" type="submit">Criar conta</button>
+      </form>
+      <div class="divider">ou</div>
+      <button id="googleLogin" class="button secondary">Continuar com Google</button>
+      <p class="auth-note">Já é membro? <a href="Login.html">Entrar</a></p>
+      <p id="authError" class="auth-error"></p>
+    </div>
+  </section>
+</body>
+</html>

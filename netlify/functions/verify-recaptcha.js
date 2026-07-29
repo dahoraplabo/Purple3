@@ -1,6 +1,6 @@
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 
-export default async function handler(event, context) {
+export const handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -38,13 +38,21 @@ export default async function handler(event, context) {
     params.append('secret', RECAPTCHA_SECRET_KEY);
     params.append('response', token);
 
-    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: params.toString(),
     });
+
+    if (!response.ok) {
+      const message = await response.text();
+      return {
+        statusCode: 502,
+        body: JSON.stringify({ success: false, message: `reCAPTCHA siteverify falhou: ${response.status} ${message}` }),
+      };
+    }
 
     const result = await response.json();
     const valid = result.success && (!action || result.action === action) && result.score >= 0.4;

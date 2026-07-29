@@ -566,3 +566,40 @@ googleLoginButton?.addEventListener('click', async () => {
     authError.textContent = error.message;
   }
 });
+
+const googleRegisterButton = document.getElementById('googleLogin');
+
+googleRegisterButton?.addEventListener('click', async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const profile = await loadUserProfile(user.uid);
+    if (!profile) {
+      const nickname = prompt('Escolha um nickname para sua guilda:');
+      const uf = prompt('Informe seu estado (UF):');
+      const address = prompt('Endereço completo:');
+      const discovered = prompt('Como descobriu o PixelTrove?');
+      if (!nickname || !uf || !address || !discovered) {
+        alert('Cadastro incompleto. Complete todos os dados depois na página de perfil.');
+      }
+      await saveUserProfile(user, {
+        email: user.email,
+        nickname: nickname || 'Novo Membro',
+        state: uf || 'BR',
+        address: address || '',
+        discovered: discovered || 'Google',
+        method: 'google',
+        rank: 'F',
+        coins: 1,
+        platinum: 1,
+        guildRole: 'member',
+        approvedByGM: false,
+        createdAt: serverTimestamp(),
+        ipAddress: 'pending',
+      });
+    }
+    authError.textContent = '';
+  } catch (error) {
+    authError.textContent = error.message;
+  }
+});
